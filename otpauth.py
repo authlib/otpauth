@@ -25,6 +25,10 @@ import hmac
 import struct
 import time
 
+__author__ = 'Hsiaoming Yang <me@lepture.com>'
+__homepage__ = 'https://github.com/lepture/otpauth'
+__version__ = '0.1.0'
+
 
 __all__ = ['OtpAuth']
 
