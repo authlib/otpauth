@@ -17,6 +17,7 @@ if sys.version_info[0] == 3:
 else:
     python_version = 2
     string_type = unicode
+    range = xrange
 
 import base64
 import hashlib
@@ -40,7 +41,7 @@ class OtpAuth(object):
     def hotp(self, counter=4):
         # https://tools.ietf.org/html/rfc4226
         msg = struct.pack('>Q', counter)
-        digest = hmac.new(self.secret, msg, hashlib.sha1).digest()
+        digest = hmac.new(to_bytes(self.secret), msg, hashlib.sha1).digest()
 
         ob = digest[19]
         if python_version == 2:
@@ -67,7 +68,7 @@ class OtpAuth(object):
             return False
 
         code = int(code)
-        for i in xrange(last + 1, last + trials + 1):
+        for i in range(last + 1, last + trials + 1):
             if self.hotp(counter=i) == code:
                 return i
         return False
@@ -86,7 +87,9 @@ class OtpAuth(object):
         if type not in ('hotp', 'totp'):
             raise TypeError
 
-        secret = encode32(self.secret)
+        secret = base64.b32encode(to_bytes(self.secret))
+        # bytes to string
+        secret = secret.decode('utf-8')
 
         # https://code.google.com/p/google-authenticator/wiki/KeyUriFormat
         url = ('otpauth://%(type)s/%(label)s?secret=%(secret)s'
@@ -103,15 +106,14 @@ class OtpAuth(object):
         return ret
 
 
-def encode32(text):
+def to_bytes(text):
     if isinstance(text, string_type):
         # Python3 str -> bytes
         # Python2 unicode -> str
         text = text.encode('utf-8')
-    return base64.b32encode(text)
+    return text
 
 
 def valid_code(code):
     code = string_type(code)
-    code = code.decode('utf-8')
     return code.isdigit() and len(code) <= 6
