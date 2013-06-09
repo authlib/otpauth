@@ -81,13 +81,16 @@ class OtpAuth(object):
         return valid_code(code) and self.totp(period) == int(code)
 
     def to_google(self, type, label, issuer, counter=None):
+        type = type.lower()
+
+        if type not in ('hotp', 'totp'):
+            raise TypeError
+
         secret = encode32(self.secret)
 
         # https://code.google.com/p/google-authenticator/wiki/KeyUriFormat
         url = ('otpauth://%(type)s/%(label)s?secret=%(secret)s'
                '&issuer=%(issuer)s')
-
-        type = type.lower()
         if type == 'hotp' and not counter:
             raise ValueError('HOTP type authentication need counter')
         dct = dict(
