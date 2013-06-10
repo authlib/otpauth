@@ -14,10 +14,34 @@ To install otpauth, simply::
 
     $ pip install otpauth
 
+Usage
+-----
 
-Contribute
-----------
+Generate and validate an otp code is very simple::
 
-Read the `Contribution Guide`_.
+    >>> from otpauth import OtpAuth
+    >>> auth = OtpAuth('secret')  # a secret string
+    >>> auth.hotp()
+    330810
+    >>> auth.valid_hotp(330810)
+    4
+    >>> auth.hotp(2)
+    720111
+    >>> auth.valid_hotp(720111)
+    2
+    >>> auth.totp()  # a time based string
+    828657
+    >>> auth.valid_totp(828657)
+    True
 
-.. _`Contribution Guide`: https://github.com/lepture/otpauth/blob/master/CONTRIBUTING.rst
+
+Google Authenticator
+--------------------
+
+You can create a QR code for Google Authenticator to scan::
+
+    >>> from otpauth import OtpAuth
+    >>> auth = OtpAuth('secret')  # a secret string
+    >>> s = auth.to_google('totp', 'Example:foo@bar.baz', 'Foo')
+    >>> import qrcode
+    >>> img = qrcode.make(s)
