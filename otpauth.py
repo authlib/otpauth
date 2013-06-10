@@ -43,6 +43,10 @@ class OtpAuth(object):
         self.secret = secret
 
     def hotp(self, counter=4):
+        """Generate a HOTP code.
+
+        :param counter: HOTP is a counter based algorithm.
+        """
         # https://tools.ietf.org/html/rfc4226
         msg = struct.pack('>Q', counter)
         digest = hmac.new(to_bytes(self.secret), msg, hashlib.sha1).digest()
@@ -68,6 +72,12 @@ class OtpAuth(object):
         return self.hotp(counter)
 
     def valid_hotp(self, code, last=0, trials=100):
+        """Valid a HOTP code.
+
+        :param code: A number that is less than 6 characters.
+        :param last: Guess HOTP code from last + 1 range.
+        :param trials: Guest HOTP code end at last + trials + 1.
+        """
         if not valid_code(code):
             return False
 
@@ -80,12 +90,19 @@ class OtpAuth(object):
     def valid_totp(self, code, period=30):
         """Valid a TOTP code.
 
-        :param code: A number than is less than 6 characters.
+        :param code: A number that is less than 6 characters.
         :param period: A period that a TOTP code is valid in seconds
         """
         return valid_code(code) and self.totp(period) == int(code)
 
     def to_google(self, type, label, issuer, counter=None):
+        """Generate the otpauth protocal string for Google Authenticator.
+
+        :param type: Algorithm type, hotp or totp.
+        :param label: Label of the identifier.
+        :param issuer: The company, the organization or something else.
+        :param counter: Counter of the HOTP algorithm.
+        """
         type = type.lower()
 
         if type not in ('hotp', 'totp'):

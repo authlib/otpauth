@@ -1,3 +1,5 @@
+# coding: utf-8
+
 from otpauth import OtpAuth
 from nose.tools import raises
 
