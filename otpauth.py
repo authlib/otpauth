@@ -112,9 +112,11 @@ class OtpAuth(object):
         if type not in ('hotp', 'totp'):
             raise TypeError
 
-        secret = base64.b32encode(to_bytes(self.secret)).strip('=')
+        secret = base64.b32encode(to_bytes(self.secret))
         # bytes to string
         secret = secret.decode('utf-8')
+        # remove pad string
+        secret = secret.strip('=')
 
         # https://code.google.com/p/google-authenticator/wiki/KeyUriFormat
         url = ('otpauth://%(type)s/%(label)s?secret=%(secret)s'
