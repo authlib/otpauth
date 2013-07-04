@@ -8,8 +8,13 @@
     :copyright: (c) 2013 by Hsiaoming Yang.
     :license: BSD, see LICENSE for more details.
 """
-
+import base64
+import hashlib
+import hmac
+import struct
 import sys
+import time
+
 
 if sys.version_info[0] == 3:
     python_version = 3
@@ -19,18 +24,17 @@ else:
     string_type = unicode
     range = xrange
 
-import base64
-import hashlib
-import hmac
-import struct
-import time
 
 __author__ = 'Hsiaoming Yang <me@lepture.com>'
 __homepage__ = 'https://github.com/lepture/otpauth'
 __version__ = '0.1.0'
 
 
-__all__ = ['OtpAuth']
+__all__ = ['OtpAuth', 'HOTP', 'TOTP']
+
+
+HOTP = 'hotp'
+TOTP = 'totp'
 
 
 class OtpAuth(object):
@@ -108,7 +112,7 @@ class OtpAuth(object):
         if type not in ('hotp', 'totp'):
             raise TypeError
 
-        secret = base64.b32encode(to_bytes(self.secret))
+        secret = base64.b32encode(to_bytes(self.secret)).strip('=')
         # bytes to string
         secret = secret.decode('utf-8')
 

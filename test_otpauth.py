@@ -1,5 +1,4 @@
-# coding: utf-8
-
+# -*- coding: utf-8 -*-
 from otpauth import OtpAuth
 from nose.tools import raises
 
@@ -39,12 +38,11 @@ def test_to_google_hotp_raise():
 
 def test_to_google_hotp():
     auth = OtpAuth('python')
-    expect = ('otpauth://hotp/python?secret=OB4XI2DPNY======'
-              '&issuer=python&counter=4')
+    expect = 'otpauth://hotp/python?secret=OB4XI2DPNY&issuer=python&counter=4'
     assert auth.to_google('hotp', 'python', 'python', 4) == expect
 
 
 def test_to_google_totp():
     auth = OtpAuth('python')
-    expect = 'otpauth://totp/python?secret=OB4XI2DPNY======&issuer=python'
+    expect = 'otpauth://totp/python?secret=OB4XI2DPNY&issuer=python'
     assert auth.to_google('totp', 'python', 'python') == expect
