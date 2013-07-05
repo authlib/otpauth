@@ -2,6 +2,12 @@
 # -*- coding: utf-8 -*-
 
 try:
+    # for `python setup.py test`
+    import multiprocessing
+except ImportError:
+    pass
+
+try:
     from setuptools import setup
 except ImportError:
     from distutils.core import setup
@@ -21,6 +27,8 @@ setup(
     long_description=open('README.rst').read(),
     license=open('LICENSE').read(),
     platforms='any',
+    tests_require=['nose'],
+    test_suite='nose.collector',
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Console',
