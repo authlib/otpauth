@@ -110,7 +110,10 @@ class OtpAuth(object):
         type = type.lower()
 
         if type not in ('hotp', 'totp'):
-            raise TypeError
+            raise ValueError('type must be hotp or totp')
+
+        if type == 'hotp' and not counter:
+            raise ValueError('HOTP type authentication need counter')
 
         secret = base64.b32encode(to_bytes(self.secret))
         # bytes to string
@@ -121,8 +124,6 @@ class OtpAuth(object):
         # https://code.google.com/p/google-authenticator/wiki/KeyUriFormat
         url = ('otpauth://%(type)s/%(label)s?secret=%(secret)s'
                '&issuer=%(issuer)s')
-        if type == 'hotp' and not counter:
-            raise ValueError('HOTP type authentication need counter')
         dct = dict(
             type=type, label=label, issuer=issuer,
             secret=secret, counter=counter

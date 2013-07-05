@@ -24,7 +24,7 @@ def test_totp():
     assert auth.valid_hotp(123456) is False
 
 
-@raises(TypeError)
+@raises(ValueError)
 def test_to_google_raise():
     auth = OtpAuth('python')
     auth.to_google('invalid', 'python', 'python')
