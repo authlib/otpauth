@@ -2,7 +2,7 @@ otpauth
 =======
 
 otpauth is One Time Password Authentication, which is usually called as
-two steps authentication. You may have heard it from Google, Dropbox and
+two steps verification. You may have heard it from Google, Dropbox and
 etc.
 
 .. image:: https://badge.fury.io/py/otpauth.png
