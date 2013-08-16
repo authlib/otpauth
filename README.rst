@@ -1,18 +1,33 @@
-One Time Password Authentication
-================================
+otpauth
+=======
 
+otpauth is One Time Password Authentication, which is usually called as
+two steps authentication. You may have heard it from Google, Dropbox and
+etc.
+
+.. image:: https://badge.fury.io/py/otpauth.png
+    :target: http://badge.fury.io/py/otpauth
 .. image:: https://travis-ci.org/lepture/otpauth.png?branch=master
-        :target: https://travis-ci.org/lepture/otpauth
+    :target: https://travis-ci.org/lepture/otpauth
 .. image:: https://coveralls.io/repos/lepture/otpauth/badge.png?branch=master
-        :target: https://coveralls.io/r/lepture/otpauth
+    :target: https://coveralls.io/r/lepture/otpauth
 
 
 Installation
 ------------
 
-To install otpauth, simply::
+Installing otpauth is simple with pip_::
 
     $ pip install otpauth
+
+or, with easy_install_::
+
+    $ easy_install otpauth
+
+
+.. _pip: http://www.pip-installer.org/
+.. _easy_install: http://pypi.python.org/pypi/setuptools
+
 
 Usage
 -----
@@ -21,15 +36,15 @@ Generate and validate an otp code is very simple::
 
     >>> from otpauth import OtpAuth
     >>> auth = OtpAuth('secret')  # a secret string
-    >>> auth.hotp()
+    >>> auth.hotp()  # generate a count based code, default count is 4
     330810
     >>> auth.valid_hotp(330810)
     4
-    >>> auth.hotp(2)
+    >>> auth.hotp(2)  # generate a count based code, count is 2
     720111
     >>> auth.valid_hotp(720111)
     2
-    >>> auth.totp()  # a time based string
+    >>> auth.totp()  # generate a time based code
     828657
     >>> auth.valid_totp(828657)
     True
