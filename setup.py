@@ -25,7 +25,7 @@ setup(
     py_modules=['otpauth'],
     description='Implements two-step verification of HOTP/TOTP',
     long_description=open('README.rst').read(),
-    license=open('LICENSE').read(),
+    license='BSD',
     platforms='any',
     tests_require=['nose'],
     test_suite='nose.collector',
