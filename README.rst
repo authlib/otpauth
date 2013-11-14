@@ -50,13 +50,19 @@ Generate and validate an otp code is very simple::
     True
 
 
-Google Authenticator
---------------------
+Authenticator
+-------------
 
 You can create a QR code for Google Authenticator to scan::
 
     >>> from otpauth import OtpAuth
     >>> auth = OtpAuth('secret')  # a secret string
-    >>> s = auth.to_google('totp', 'Example:foo@bar.baz', 'Foo')
+    >>> s = auth.to_uri('totp', 'Example:foo@bar.baz', 'Foo')
     >>> import qrcode
     >>> img = qrcode.make(s)
+
+
+Since Google Authenticator was not maintained well. There is a good
+replacement: Duo Mobile.
+
+You should try this one.
