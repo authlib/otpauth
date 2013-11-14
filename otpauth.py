@@ -14,6 +14,7 @@ import hmac
 import struct
 import sys
 import time
+import warnings
 
 
 if sys.version_info[0] == 3:
@@ -27,7 +28,7 @@ else:
 
 __author__ = 'Hsiaoming Yang <me@lepture.com>'
 __homepage__ = 'https://github.com/lepture/otpauth'
-__version__ = '0.1.2'
+__version__ = '0.2.0'
 
 
 __all__ = ['OtpAuth', 'HOTP', 'TOTP']
@@ -99,8 +100,8 @@ class OtpAuth(object):
         """
         return valid_code(code) and self.totp(period) == int(code)
 
-    def to_google(self, type, label, issuer, counter=None):
-        """Generate the otpauth protocal string for Google Authenticator.
+    def to_uri(self, type, label, issuer, counter=None):
+        """Generate the otpauth protocal string.
 
         :param type: Algorithm type, hotp or totp.
         :param label: Label of the identifier.
@@ -132,6 +133,15 @@ class OtpAuth(object):
         if type == 'hotp':
             ret = '%s&counter=%s' % (ret, counter)
         return ret
+
+    def to_google(self, type, label, issuer, counter=None):
+        """Generate the otpauth protocal string for Google Authenticator.
+
+        .. deprecated:: 0.2.0
+           Use :func:`to_uri` instead.
+        """
+        warnings.warn('deprecated, use to_uri instead', DeprecationWarning)
+        return self.to_uri(type, label, issuer, counter)
 
 
 def to_bytes(text):

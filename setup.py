@@ -16,6 +16,12 @@ import otpauth
 from email.utils import parseaddr
 author, author_email = parseaddr(otpauth.__author__)
 
+
+def fread(path):
+    with open(path, 'r') as f:
+        return f.read()
+
+
 setup(
     name='otpauth',
     version=otpauth.__version__,
@@ -24,7 +30,7 @@ setup(
     url=otpauth.__homepage__,
     py_modules=['otpauth'],
     description='Implements two-step verification of HOTP/TOTP',
-    long_description=open('README.rst').read(),
+    long_description=fread('README.rst'),
     license='BSD',
     platforms='any',
     tests_require=['nose'],
