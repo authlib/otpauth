@@ -5,7 +5,7 @@
 
     Implements two-step verification of HOTP/TOTP.
 
-    :copyright: (c) 2013 by Hsiaoming Yang.
+    :copyright: (c) 2013 - 2014 by Hsiaoming Yang.
     :license: BSD, see LICENSE for more details.
 """
 import base64
@@ -31,7 +31,7 @@ __homepage__ = 'https://github.com/lepture/otpauth'
 __version__ = '0.2.0'
 
 
-__all__ = ['OtpAuth', 'HOTP', 'TOTP']
+__all__ = ['OtpAuth', 'HOTP', 'TOTP', 'generate_hotp', 'generate_totp']
 
 
 HOTP = 'hotp'
@@ -52,18 +52,7 @@ class OtpAuth(object):
 
         :param counter: HOTP is a counter based algorithm.
         """
-        # https://tools.ietf.org/html/rfc4226
-        msg = struct.pack('>Q', counter)
-        digest = hmac.new(to_bytes(self.secret), msg, hashlib.sha1).digest()
-
-        ob = digest[19]
-        if python_version == 2:
-            ob = ord(ob)
-
-        pos = ob & 15
-        base = struct.unpack('>I', digest[pos:pos + 4])[0] & 0x7fffffff
-        token = base % 1000000
-        return token
+        return generate_hotp(self.secret, counter)
 
     def totp(self, period=30):
         """Generate a TOTP code.
@@ -72,9 +61,7 @@ class OtpAuth(object):
 
         :param period: A period that a TOTP code is valid in seconds
         """
-        # https://tools.ietf.org/html/rfc6238
-        counter = int(time.time()) // period
-        return self.hotp(counter)
+        return generate_totp(self.secret, period)
 
     def valid_hotp(self, code, last=0, trials=100):
         """Valid a HOTP code.
@@ -142,6 +129,38 @@ class OtpAuth(object):
         """
         warnings.warn('deprecated, use to_uri instead', DeprecationWarning)
         return self.to_uri(type, label, issuer, counter)
+
+
+def generate_hotp(secret, counter=4):
+    """Generate a HOTP code.
+
+    :param secret: A secret token for the authentication.
+    :param counter: HOTP is a counter based algorithm.
+    """
+    # https://tools.ietf.org/html/rfc4226
+    msg = struct.pack('>Q', counter)
+    digest = hmac.new(to_bytes(secret), msg, hashlib.sha1).digest()
+
+    ob = digest[19]
+    if python_version == 2:
+        ob = ord(ob)
+
+    pos = ob & 15
+    base = struct.unpack('>I', digest[pos:pos + 4])[0] & 0x7fffffff
+    token = base % 1000000
+    return token
+
+
+def generate_totp(secret, period=30):
+    """Generate a TOTP code.
+
+    A TOTP code is an extension of HOTP algorithm.
+
+    :param secret: A secret token for the authentication.
+    :param period: A period that a TOTP code is valid in seconds
+    """
+    counter = int(time.time()) // period
+    return generate_hotp(secret, counter)
 
 
 def to_bytes(text):
