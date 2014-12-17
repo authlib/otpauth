@@ -54,14 +54,14 @@ class OtpAuth(object):
         """
         return generate_hotp(self.secret, counter)
 
-    def totp(self, period=30):
+    def totp(self, period=30, at=time.time()):
         """Generate a TOTP code.
 
         A TOTP code is an extension of HOTP algorithm.
 
         :param period: A period that a TOTP code is valid in seconds
         """
-        return generate_totp(self.secret, period)
+        return generate_totp(self.secret, period, at)
 
     def valid_hotp(self, code, last=0, trials=100):
         """Valid a HOTP code.
@@ -79,13 +79,13 @@ class OtpAuth(object):
                 return i
         return False
 
-    def valid_totp(self, code, period=30):
+    def valid_totp(self, code, period=30, at=time.time()):
         """Valid a TOTP code.
 
         :param code: A number that is less than 6 characters.
         :param period: A period that a TOTP code is valid in seconds
         """
-        return valid_code(code) and self.totp(period) == int(code)
+        return valid_code(code) and self.totp(period, at) == int(code)
 
     def to_uri(self, type, label, issuer, counter=None):
         """Generate the otpauth protocal string.
@@ -151,7 +151,7 @@ def generate_hotp(secret, counter=4):
     return token
 
 
-def generate_totp(secret, period=30):
+def generate_totp(secret, period=30, at=time.time()):
     """Generate a TOTP code.
 
     A TOTP code is an extension of HOTP algorithm.
@@ -159,7 +159,7 @@ def generate_totp(secret, period=30):
     :param secret: A secret token for the authentication.
     :param period: A period that a TOTP code is valid in seconds
     """
-    counter = int(time.time()) // period
+    counter = int(at) // period
     return generate_hotp(secret, counter)
 
 
