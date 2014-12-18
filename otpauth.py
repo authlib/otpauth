@@ -8,12 +8,12 @@
     :copyright: (c) 2013 - 2014 by Hsiaoming Yang.
     :license: BSD, see LICENSE for more details.
 """
-import base64
-import hashlib
-import hmac
-import struct
 import sys
 import time
+import hmac
+import base64
+import struct
+import hashlib
 import warnings
 
 
