@@ -60,9 +60,3 @@ You can create a QR code for Google Authenticator to scan::
     >>> s = auth.to_uri('totp', 'Example:foo@bar.baz', 'Foo')
     >>> import qrcode
     >>> img = qrcode.make(s)
-
-
-Since Google Authenticator was not maintained well. There is a good
-replacement: Duo Mobile.
-
-You should try this one.
