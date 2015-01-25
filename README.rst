@@ -5,13 +5,21 @@ otpauth is One Time Password Authentication, which is usually called as
 two steps verification. You may have heard it from Google, Dropbox and
 etc.
 
-.. image:: https://badge.fury.io/py/otpauth.png
-    :target: http://badge.fury.io/py/otpauth
-.. image:: https://travis-ci.org/lepture/otpauth.png?branch=master
-    :target: https://travis-ci.org/lepture/otpauth
-.. image:: https://coveralls.io/repos/lepture/otpauth/badge.png?branch=master
-    :target: https://coveralls.io/r/lepture/otpauth
-
+.. image:: https://pypip.in/wheel/otpauth/badge.svg?style=flat
+   :target: https://pypi.python.org/pypi/otpauth/
+   :alt: Wheel Status
+.. image:: https://pypip.in/version/otpauth/badge.svg?style=flat
+   :target: https://pypi.python.org/pypi/otpauth/
+   :alt: Latest Version
+.. image:: https://travis-ci.org/lepture/otpauth.svg?branch=master
+   :target: https://travis-ci.org/lepture/otpauth
+   :alt: Travis CI Status
+.. image:: https://coveralls.io/repos/lepture/otpauth/badge.svg?branch=master
+   :target: https://coveralls.io/r/lepture/otpauth
+   :alt: Coverage Status
+.. image:: https://ci.appveyor.com/api/projects/status/x1rqksux15hicutq/branch/master
+   :target: https://ci.appveyor.com/project/lepture/otpauth
+   :alt: App Veyor CI Status
 
 Installation
 ------------

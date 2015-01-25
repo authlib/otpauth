@@ -27,3 +27,6 @@ clean-docs:
 
 docs:
 	@$(MAKE) -C docs html
+
+publish-docs: docs
+	@python setup.py upload_sphinx --upload-dir=docs/_build/html/
