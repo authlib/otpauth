@@ -4,6 +4,13 @@ Changelog
 
 Here is the full history of otpauth.
 
+Version 1.0
+~~~~~~~~~~~
+
+Released on Jan 25, 2015
+
+Nothing new. It is stable now.
+
 Version 0.3.0
 ~~~~~~~~~~~~~
 
