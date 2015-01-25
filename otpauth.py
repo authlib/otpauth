@@ -5,7 +5,7 @@
 
     Implements two-step verification of HOTP/TOTP.
 
-    :copyright: (c) 2013 - 2014 by Hsiaoming Yang.
+    :copyright: (c) 2013 - 2015 by Hsiaoming Yang.
     :license: BSD, see LICENSE for more details.
 """
 import sys
