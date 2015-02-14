@@ -89,6 +89,14 @@ class OtpAuth(object):
         """
         return valid_code(code) and self.totp(period, timestamp) == int(code)
 
+    @property
+    def encoded_secret(self):
+        secret = base64.b32encode(to_bytes(self.secret))
+        # bytes to string
+        secret = secret.decode('utf-8')
+        # remove pad string
+        return secret.strip('=')
+
     def to_uri(self, type, label, issuer, counter=None):
         """Generate the otpauth protocal string.
 
@@ -105,18 +113,12 @@ class OtpAuth(object):
         if type == 'hotp' and not counter:
             raise ValueError('HOTP type authentication need counter')
 
-        secret = base64.b32encode(to_bytes(self.secret))
-        # bytes to string
-        secret = secret.decode('utf-8')
-        # remove pad string
-        secret = secret.strip('=')
-
         # https://code.google.com/p/google-authenticator/wiki/KeyUriFormat
         url = ('otpauth://%(type)s/%(label)s?secret=%(secret)s'
                '&issuer=%(issuer)s')
         dct = dict(
             type=type, label=label, issuer=issuer,
-            secret=secret, counter=counter
+            secret=self.encoded_secret, counter=counter
         )
         ret = url % dct
         if type == 'hotp':
