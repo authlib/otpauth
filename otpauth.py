@@ -28,7 +28,7 @@ else:
 
 __author__ = 'Hsiaoming Yang <me@lepture.com>'
 __homepage__ = 'https://github.com/lepture/otpauth'
-__version__ = '1.0'
+__version__ = '1.0.1'
 
 
 __all__ = ['OtpAuth', 'HOTP', 'TOTP', 'generate_hotp', 'generate_totp']

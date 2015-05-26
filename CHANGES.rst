@@ -4,6 +4,13 @@ Changelog
 
 Here is the full history of otpauth.
 
+Version 1.0.1
+~~~~~~~~~~~~~
+
+Released on May 26, 2015
+
+Use ``compare_digest`` to avoid timing attack.
+
 Version 1.0
 ~~~~~~~~~~~
 
