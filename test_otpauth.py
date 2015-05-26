@@ -20,8 +20,8 @@ def test_totp():
     assert auth.valid_totp(code)
 
     # false
-    assert auth.valid_hotp(1234567) is False
-    assert auth.valid_hotp(123456) is False
+    assert auth.valid_totp(1234567) is False
+    assert auth.valid_totp(123456) is False
 
 
 @raises(ValueError)
