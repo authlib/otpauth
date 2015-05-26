@@ -74,7 +74,7 @@ class OtpAuth(object):
         if not valid_code(code):
             return False
 
-        code = bytes(code)
+        code = bytes(int(code))
         for i in range(last + 1, last + trials + 1):
             if compare_digest(bytes(self.hotp(counter=i)), code):
                 return i
@@ -89,7 +89,10 @@ class OtpAuth(object):
         """
         if not valid_code(code):
             return False
-        return compare_digest(bytes(self.totp(period, timestamp)), bytes(code))
+        return compare_digest(
+            bytes(self.totp(period, timestamp)),
+            bytes(int(code))
+        )
 
     @property
     def encoded_secret(self):
@@ -186,7 +189,7 @@ def valid_code(code):
 
 
 def compare_digest(a, b):
-    func = getattr(hmac, 'compare_digest')
+    func = getattr(hmac, 'compare_digest', None)
     if func:
         return func(a, b)
 
