@@ -18,10 +18,10 @@ import warnings
 
 
 if sys.version_info[0] == 3:
-    python_version = 3
+    PY2 = False
     string_type = str
 else:
-    python_version = 2
+    PY2 = True
     string_type = unicode
     range = xrange
 
@@ -74,9 +74,9 @@ class OtpAuth(object):
         if not valid_code(code):
             return False
 
-        code = int(code)
+        code = bytes(code)
         for i in range(last + 1, last + trials + 1):
-            if self.hotp(counter=i) == code:
+            if compare_digest(bytes(self.hotp(counter=i)), code):
                 return i
         return False
 
@@ -87,7 +87,9 @@ class OtpAuth(object):
         :param period: A period that a TOTP code is valid in seconds
         :param timestamp: Validate TOTP at this given timestamp
         """
-        return valid_code(code) and self.totp(period, timestamp) == int(code)
+        if not valid_code(code):
+            return False
+        return compare_digest(bytes(self.totp(period, timestamp)), bytes(code))
 
     @property
     def encoded_secret(self):
@@ -146,7 +148,7 @@ def generate_hotp(secret, counter=4):
     digest = hmac.new(to_bytes(secret), msg, hashlib.sha1).digest()
 
     ob = digest[19]
-    if python_version == 2:
+    if PY2:
         ob = ord(ob)
 
     pos = ob & 15
@@ -181,3 +183,23 @@ def to_bytes(text):
 def valid_code(code):
     code = string_type(code)
     return code.isdigit() and len(code) <= 6
+
+
+def compare_digest(a, b):
+    func = getattr(hmac, 'compare_digest')
+    if func:
+        return func(a, b)
+
+    # fallback
+    if len(a) != len(b):
+        return False
+
+    rv = 0
+    if PY2:
+        from itertools import izip
+        for x, y in izip(a, b):
+            rv |= ord(x) ^ ord(y)
+    else:
+        for x, y in zip(a, b):
+            rv |= x ^ y
+    return rv == 0
