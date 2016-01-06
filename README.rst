@@ -72,3 +72,4 @@ You can create a QR code for Google Authenticator to scan::
     >>> s = auth.to_uri('totp', 'Example:foo@bar.baz', 'Foo')
     >>> import qrcode
     >>> img = qrcode.make(s)
+    >>> img.save('totp_qrcode.png', 'PNG')
