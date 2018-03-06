@@ -9,10 +9,10 @@ otpauth is One Time Password Authentication, which is usually called as
 two steps verification. You may have heard it from Google, Dropbox and
 etc.
 
-.. image:: https://pypip.in/wheel/otpauth/badge.svg?style=flat
+.. image:: https://img.shields.io/pypi/wheel/otpauth.svg?style=flat
    :target: https://pypi.python.org/pypi/otpauth/
    :alt: Wheel Status
-.. image:: https://pypip.in/version/otpauth/badge.svg?style=flat
+.. image:: https://img.shields.io/pypi/v/otpauth.svg?style=flat
    :target: https://pypi.python.org/pypi/otpauth/
    :alt: Latest Version
 .. image:: https://travis-ci.org/lepture/otpauth.svg?branch=master
