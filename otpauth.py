@@ -45,6 +45,7 @@ class OtpAuth(object):
     """
 
     def __init__(self, secret, encoded=False):
+        secret += '='*(-len(secret) % 8)
         self.secret = base64.b32decode(to_bytes(secret),True) if encoded else secret
 
     def hotp(self, counter=4):
