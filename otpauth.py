@@ -44,8 +44,8 @@ class OtpAuth(object):
     :param secret: A secret token for the authentication.
     """
 
-    def __init__(self, secret):
-        self.secret = secret
+    def __init__(self, secret, encoded=False):
+        self.secret = base64.b32decode(to_bytes(secret),True) if encoded else secret
 
     def hotp(self, counter=4):
         """Generate a HOTP code.
