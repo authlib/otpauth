@@ -48,6 +48,7 @@ Generate and validate an otp code is very simple::
 
     >>> from otpauth import OtpAuth
     >>> auth = OtpAuth('secret')  # a secret string
+    >>> auth = OtpAuth('ONSWG4TFOQ6T2', True) # or base32 encoded string, width or widthout paddings(the '=' characters)
     >>> auth.hotp()  # generate a count based code, default count is 4
     330810
     >>> auth.valid_hotp(330810)
