@@ -43,7 +43,7 @@ version = {attr = "otpauth.__version__"}
 where = ["src"]
 
 [tool.pytest.ini_options]
-pythonpath = ["src", "."]
+pythonpath = ["src"]
 testpaths = ["tests"]
 filterwarnings = ["error"]
 

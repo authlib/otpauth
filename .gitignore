@@ -1,6 +1,7 @@
 *.pyc
 *.pyo
 *.egg-info
+*.coverage
 __pycache__
 bin
 build
