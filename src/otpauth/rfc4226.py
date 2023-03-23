@@ -22,7 +22,7 @@ class HOTP(OTP):
         """
         if len(str(code)) > self.digit:
             return False
-        return hashlib.compare_digest(bytes(self.generate(counter)), bytes(code))
+        return hmac.compare_digest(bytes(self.generate(counter)), bytes(code))
 
     def to_uri(self, label: str, issuer: str, counter: int) -> str:
         """Generate the otpauth protocal string for HOTP.
@@ -31,7 +31,7 @@ class HOTP(OTP):
         :param issuer: The company, the organization or something else.
         :param counter: Initial counter of the HOTP algorithm.
         """
-        uri = f"otpauth://hotp/{label}?secret={self.b32_secret}&issuer={issuer}&algorithm={self.algorithm}&digits={self.digit}"
+        uri = self._get_base_uri(label, issuer)
         return uri + f"&counter={counter}"
 
 

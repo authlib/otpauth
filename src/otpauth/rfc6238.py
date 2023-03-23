@@ -1,5 +1,5 @@
 import time
-import hashlib
+import hmac
 from .core import OTP
 from .rfc4226 import generate_hotp
 
@@ -26,7 +26,7 @@ class TOTP(OTP):
         """
         if len(str(code)) > self.digit:
             return False
-        return hashlib.compare_digest(bytes(self.generate(timestamp)), bytes(code))
+        return hmac.compare_digest(bytes(self.generate(timestamp)), bytes(code))
 
     def to_uri(self, label: str, issuer: str) -> str:
         """Generate the otpauth protocal string for TOTP.
@@ -34,7 +34,7 @@ class TOTP(OTP):
         :param label: Label of the identifier.
         :param issuer: The company, the organization or something else.
         """
-        uri = f"otpauth://totp/{label}?secret={self.b32_secret}&issuer={issuer}&algorithm={self.algorithm}&digits={self.digit}"
+        uri = self._get_base_uri(label, issuer)
         return uri + f"&period={self.period}"
 
 

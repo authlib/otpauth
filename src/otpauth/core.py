@@ -1,4 +1,5 @@
 import base64
+from urllib.parse import quote
 from abc import ABCMeta, abstractmethod
 
 
@@ -33,6 +34,10 @@ class OTP(object, metaclass=ABCMeta):
         obj = cls(raw_secret)
         obj._b32_secret = b32_secret
         return obj
+
+    def _get_base_uri(self, label: str, issuer: str) -> str:
+        label = quote(label, safe="/@")
+        return f"otpauth://hotp/{label}?secret={self.b32_secret}&issuer={issuer}&algorithm={self.algorithm}&digits={self.digit}"
 
     @abstractmethod
     def generate(self, *args, **kwargs) -> int:
