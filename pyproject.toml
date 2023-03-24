@@ -3,7 +3,7 @@ name = "otpauth"
 description = "Implements one time password of HOTP/TOTP"
 authors = [{name = "Hsiaoming Yang", email="me@lepture.com"}]
 dependencies = []
-license = {file = "LICENSE"}
+license = {text = "BSD-3-Clause"}
 requires-python = ">=3.7"
 dynamic = ["version"]
 readme = "README.rst"
