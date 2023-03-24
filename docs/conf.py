@@ -16,7 +16,16 @@ release = version
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.autodoc']
+extensions = [
+    "sphinx.ext.autodoc",
+    "sphinx.ext.intersphinx",
+    "sphinx.ext.extlinks",
+]
+
+intersphinx_mapping = {
+    "python": ("https://docs.python.org/3", None),
+    "sphinx": ("https://www.sphinx-doc.org/en/master", None),
+}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -34,11 +43,11 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 #
 html_theme = 'shibuya'
 html_theme_options = {
-    "light_logo": "_static/light-logo.svg",
-    "dark_logo": "_static/dark-logo.svg",
-    'twitter_site': 'lepture',
+    # "light_logo": "_static/light-logo.svg",
+    # "dark_logo": "_static/dark-logo.svg",
+    'twitter_site': 'authlib',
     'twitter_creator': 'lepture',
-    'twitter_url': 'https://twitter.com/lepture',
+    'twitter_url': 'https://twitter.com/authlib',
     'github_url': 'https://github.com/lepture/otpauth',
     'nav_links': [
         {'title': 'Sponsor me', 'url': 'https://github.com/sponsors/lepture'}
@@ -48,9 +57,9 @@ html_theme_options = {
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+# html_static_path = ['_static']
 
 html_copy_source = False
 html_show_sourcelink = False
 
-html_favicon = "_static/light-icon.svg"
+# html_favicon = "_static/light-icon.svg"

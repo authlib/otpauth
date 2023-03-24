@@ -1,6 +1,6 @@
 [project]
 name = "otpauth"
-description = "Implements two-step verification of HOTP/TOTP"
+description = "Implements one time password of HOTP/TOTP"
 authors = [{name = "Hsiaoming Yang", email="me@lepture.com"}]
 dependencies = []
 license = {file = "LICENSE"}
@@ -28,7 +28,7 @@ classifiers = [
 ]
 
 [project.urls]
-Documentation = "https://otpauth.authlib.org/"
+Documentation = "https://otp.authlib.org/"
 Donate = "https://github.com/sponsors/lepture"
 Blog = "https://blog.authlib.org/"
 

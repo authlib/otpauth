@@ -1,16 +1,47 @@
-.. include:: ../README.rst
+OTP Auth
+========
 
-Developer Guide
----------------
+Installation
+------------
 
-Here is the API reference for otpauth.
+Installing otpauth is simple with ``pip``::
 
-.. module:: otpauth
+    $ pip install otpauth
 
-.. autoclass:: OtpAuth
-   :members:
+Simple Guide
+------------
 
-.. autofunction:: generate_hotp
-.. autofunction:: generate_totp
+Most of the time, you would use a time based one time password. You can generate and
+verify the token with :class:`TOTP`::
 
-.. include:: ../CHANGES.rst
+    import otpauth
+
+    totp = otpauth.HOTP(b"user-secret")
+
+    # generate a code for now
+    code: int = totp.generate()
+
+    # you may want to convert it to string
+    str_code: str = totp.string_code(code)
+
+    # verify the code
+    totp.verify(code)  # => True
+    totp.verify(str_code)  # => True
+
+.. note:: To learn more about ``TOTP``, head over to :ref:`totp`.
+
+Next Steps
+----------
+
+.. toctree::
+    :caption: Guide
+
+    recipes
+    api
+
+.. toctree::
+    :caption: Development
+
+    alternatives
+    contribute
+    changelog
