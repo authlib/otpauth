@@ -11,6 +11,7 @@ class OTP(object, metaclass=ABCMeta):
     ALGORITHMS = ["SHA1", "SHA256", "SHA512"]
 
     def __init__(self, secret: bytes, digit: int = 6, algorithm: str = "SHA1"):
+        assert 0 < digit < 11
         assert algorithm in self.ALGORITHMS
 
         self.secret = secret
