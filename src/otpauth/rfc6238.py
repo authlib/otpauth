@@ -5,6 +5,14 @@ from .rfc4226 import generate_hotp
 
 
 class TOTP(OTP):
+    """Implementation of RFC6238, Time-Based One-Time Password Algorithm.
+
+    :param secret: A secret in bytes
+    :param digit: Number of digits in the HOTP code.
+    :param algorithm: Hash algorithm used in HOTP.
+    :param period: The password valid in "period" seconds.
+    """
+
     TYPE = "TOTP"
 
     def __init__(self, secret: bytes, digit: int = 6, algorithm: str = "SHA1", period: int = 30):
@@ -12,7 +20,12 @@ class TOTP(OTP):
         self.period = period
 
     def generate(self, timestamp: int = None) -> int:
-        """Generate a TOTP code.
+        """Generate a TOTP code. The returning result is an integer.
+        To convert it into string with the correct digit length, developers
+        can use :meth:`string_code`::
+
+            int_code = totp.generate()
+            str_code = totp.string_code(int_code)
 
         :param timestamp: Create TOTP at this given timestamp, default is now.
         """

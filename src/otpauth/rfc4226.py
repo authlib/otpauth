@@ -5,10 +5,22 @@ from .core import OTP
 
 
 class HOTP(OTP):
+    """Implementation of RFC4226, An HMAC-Based One-Time Password Algorithm.
+
+    :param secret: A secret in bytes
+    :param digit: Number of digits in the HOTP code.
+    :param algorithm: Hash algorithm used in HOTP.
+    """
+
     TYPE = "HOTP"
 
     def generate(self, counter: int) -> int:
-        """Generate a HOTP code.
+        """Generate a HOTP code. The returning result is an integer.
+        To convert it into string with the correct digit length, developers
+        can use :meth:`string_code`::
+
+            int_code = hotp.generate(4)
+            str_code = hotp.string_code(int_code)
 
         :param counter: HOTP is a counter based algorithm.
         """
@@ -41,7 +53,7 @@ def generate_hotp(secret: bytes, counter: int, digit: int=6, algorithm: str = "S
     :param secret: A secret token for the authentication.
     :param counter: HOTP is a counter based algorithm.
     :param digit: Number of digits in the HOTP code.
-    :param hash_alg: Hash algorithm used in HOTP, default is hashlib.sha1.
+    :param algorithm: Hash algorithm used in HOTP.
     """
     hash_alg = getattr(hashlib, algorithm.lower())
     msg = struct.pack('>Q', counter)
