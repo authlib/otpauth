@@ -10,7 +10,7 @@ Usage
 -----
 
 Most of the time, you would use a time based one time password. You can generate and
-verify the token with :class:`TOTP`::
+verify the token with ``HOTP``::
 
     import otpauth
 

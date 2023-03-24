@@ -8,4 +8,6 @@ https://pythonhosted.org/otpauth/
 2.0.0
 -----
 
+**Released on Mar 24, 2023**
+
 New, rewrite completely.
