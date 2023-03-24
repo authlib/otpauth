@@ -48,7 +48,8 @@ html_theme_options = {
     'twitter_site': 'authlib',
     'twitter_creator': 'lepture',
     'twitter_url': 'https://twitter.com/authlib',
-    'github_url': 'https://github.com/lepture/otpauth',
+    'github_url': 'https://github.com/authlib/otpauth',
+    'discord_url': 'https://discord.gg/HvBVAeNAaV',
     'nav_links': [
         {'title': 'Sponsor me', 'url': 'https://github.com/sponsors/lepture'}
     ]
@@ -63,3 +64,9 @@ html_copy_source = False
 html_show_sourcelink = False
 
 # html_favicon = "_static/light-icon.svg"
+
+html_context = {
+    "source_type": "github",
+    "source_user": "authlib",
+    "source_repo": "otpauth",
+}

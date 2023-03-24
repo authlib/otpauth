@@ -8,6 +8,8 @@ Here are the list of API reference; it might be helpful for developers.
 HOTP
 ----
 
+Implementation of RFC4226, An HMAC-Based One-Time Password Algorithm.
+
 .. autoclass:: HOTP
    :members:
    :inherited-members:
@@ -16,6 +18,8 @@ HOTP
 
 TOTP
 ----
+
+Implementation of RFC6238, Time-Based One-Time Password Algorithm.
 
 .. autoclass:: TOTP
    :members:

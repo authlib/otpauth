@@ -1,6 +1,19 @@
 OTP Auth
 ========
 
+One time password implementations in Python. HOTP and TOTP.
+
+.. note::
+
+    This is a redesigned "v2" of otpauth. Get "v1" documentation
+    at https://pythonhosted.org/otpauth/.
+
+"v1" is considered stable, you may still use it. But "v2" has some
+enhancements:
+
+- **Type hints**: your editor will love it.
+- **No Python 2**: clean code without compatible patches.
+
 Installation
 ------------
 

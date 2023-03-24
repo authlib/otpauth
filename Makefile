@@ -1,11 +1,5 @@
-.PHONY: clean-pyc clean-build docs test coverage
+.PHONY: clean-pyc clean-build docs
 
-test:
-	@nosetests -s
-
-coverage:
-	@rm -f .coverage
-	@nosetests --with-coverage --cover-package=otpauth --cover-html
 
 clean: clean-build clean-pyc clean-docs
 
@@ -27,6 +21,3 @@ clean-docs:
 
 docs:
 	@$(MAKE) -C docs html
-
-publish-docs: docs
-	@python setup.py upload_sphinx --upload-dir=docs/_build/html/
