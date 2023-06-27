@@ -43,15 +43,37 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 #
 html_theme = 'shibuya'
 html_theme_options = {
-    # "light_logo": "_static/light-logo.svg",
-    # "dark_logo": "_static/dark-logo.svg",
+    "light_logo": "_static/light-logo.svg",
+    "dark_logo": "_static/dark-logo.svg",
     'twitter_site': 'authlib',
     'twitter_creator': 'lepture',
     'twitter_url': 'https://twitter.com/authlib',
     'github_url': 'https://github.com/authlib/otpauth',
     'discord_url': 'https://discord.gg/HvBVAeNAaV',
-    'nav_links': [
-        {'title': 'Sponsor me', 'url': 'https://github.com/sponsors/lepture'}
+    "carbon_ads_code": "CE7DKK3W",
+    "carbon_ads_placement": "otpauthliborg",
+    "nav_links": [
+        {
+            "title": "Projects",
+            "children": [
+                {
+                    "title": "Authlib",
+                    "url": "https://authlib.org/",
+                    "summary": "OAuth, JOSE, OpenID, etc."
+                },
+                {
+                    "title": "JOSE RFC",
+                    "url": "https://jose.authlib.org/",
+                    "summary": "JWS, JWE, JWK, and JWT."
+                },
+                {
+                    "title": "OTP Auth",
+                    "url": "https://otp.authlib.org/",
+                    "summary": "One time password, HOTP/TOTP.",
+                },
+            ]
+        },
+        {"title": "Sponsor me", "url": "https://github.com/sponsors/lepture"},
     ]
 }
 
