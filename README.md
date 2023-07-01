@@ -1,6 +1,6 @@
 <div align="center">
 
-# OTP Auth
+<img src="docs/_static/light-logo.svg" alg="OTP Auth logo" height="68" />
 
 One time password implementations in Python. HOTP and TOTP.
 
@@ -10,8 +10,9 @@ One time password implementations in Python. HOTP and TOTP.
 
 </div>
 
-Usage
------
+## Usage
+
+A quick and simple usage of ``HOTP``:
 
 ```python
 import otpauth
@@ -29,7 +30,20 @@ totp.verify(code)  # => True
 totp.verify(str_code)  # => True
 ```
 
-Copyright
----------
+## Install
+
+Install with pip:
+
+```shell
+pip install otpauth
+```
+
+## Useful links
+
+- Documentation: https://otp.authlib.org/
+- Blog: https://blog.authlib.org/
+- Twitter: https://twitter.com/authlib
+
+## Copyright
 
 2013, Hsiaoming Yang. Under BSD-3 license.
