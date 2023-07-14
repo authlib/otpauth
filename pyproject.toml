@@ -29,7 +29,7 @@ classifiers = [
 
 [project.urls]
 Documentation = "https://otp.authlib.org/"
-Donate = "https://github.com/sponsors/lepture"
+Donate = "https://github.com/sponsors/authlib"
 Blog = "https://blog.authlib.org/"
 
 [build-system]

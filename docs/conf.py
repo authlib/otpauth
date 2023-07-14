@@ -75,7 +75,7 @@ html_theme_options = {
                 },
             ]
         },
-        {"title": "Sponsor me", "url": "https://github.com/sponsors/lepture"},
+        {"title": "Sponsor me", "url": "https://github.com/sponsors/authlib"},
     ]
 }
 
@@ -87,7 +87,7 @@ html_theme_options = {
 html_copy_source = False
 html_show_sourcelink = False
 
-# html_favicon = "_static/light-icon.svg"
+html_favicon = "_static/icon.svg"
 
 html_context = {
     "source_type": "github",
