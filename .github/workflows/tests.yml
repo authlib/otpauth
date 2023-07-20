@@ -24,10 +24,14 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: flake8 lint
+        run: flake8 src/otpauth/
+
       - name: mypy lint
         run: mypy
 
   test:
+    needs: lint
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
