@@ -3,8 +3,13 @@
 Alternatives
 ============
 
-Here are some other OTP related libraries. If you don't like ``otpauth``,
-you might like these.
+.. rst-class:: lead
+
+    Here are some other OTP related libraries.
+
+----
+
+If you don't like ``otpauth``, you might like these.
 
 pyca/cryptography
 -----------------

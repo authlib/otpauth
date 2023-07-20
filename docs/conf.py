@@ -45,6 +45,7 @@ html_static_path = ["_static"]
 #
 html_theme = 'shibuya'
 html_theme_options = {
+    "dark_code": True,
     "light_logo": "_static/light-logo.svg",
     "dark_logo": "_static/dark-logo.svg",
     'twitter_site': 'authlib',

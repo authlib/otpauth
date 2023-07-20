@@ -1,8 +1,11 @@
 Contributing
 ============
 
-Thank you for considering contributing to this little library!
+.. rst-class:: lead
 
+    Thank you for considering contributing to this little library!
+
+----
 
 Support questions
 -----------------

@@ -3,7 +3,11 @@
 User Guide
 ==========
 
-Here are the detail guide on how to use TOTP and HOTP.
+.. rst-class:: lead
+
+    Here are the detail guide on how to use TOTP and HOTP.
+
+----
 
 .. _totp:
 

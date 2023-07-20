@@ -25,3 +25,8 @@ verify the token with ``HOTP``::
     # verify the code
     totp.verify(code)  # => True
     totp.verify(str_code)  # => True
+
+License
+-------
+
+Licensed under BSD. Please see LICENSE for licensing details.

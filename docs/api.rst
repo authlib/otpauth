@@ -1,7 +1,11 @@
 API References
 ==============
 
-Here are the list of API reference; it might be helpful for developers.
+.. rst-class:: lead
+
+   Here are the list of API reference; it might be helpful for developers.
+
+----
 
 .. module:: otpauth
 
