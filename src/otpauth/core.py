@@ -67,7 +67,7 @@ class OTP(metaclass=ABCMeta):
             >>> otp.string_code(123)
             '000123'
 
-        :param code: The number that this OTPnb generated.
+        :param code: The number that this OTP generated.
         """
         return "{code:0{w}}".format(code=code, w=self.digit)
 
