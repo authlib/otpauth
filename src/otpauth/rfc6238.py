@@ -57,7 +57,7 @@ def generate_totp(
         period: int = 30,
         timestamp: t.Optional[int] = None,
         digit: int = 6,
-        algorithm: SupportedAlgorithms = "SHA1"):
+        algorithm: SupportedAlgorithms = "SHA1") -> int:
     """Generate a TOTP code.
 
     A TOTP code is an extension of TOTP algorithm.

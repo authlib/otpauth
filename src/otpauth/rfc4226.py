@@ -61,5 +61,6 @@ def generate_hotp(secret: bytes, counter: int, digit: int = 6, algorithm: Suppor
     digest = hmac.new(secret, msg, hash_alg).digest()
     offset = digest[19] & 0xF
     bin_code: int = struct.unpack(">I", digest[offset: offset + 4])[0]
-    base = bin_code & 0x7FFFFFFF
-    return base % (10**digit)
+    total: int = bin_code & 0x7FFFFFFF
+    power: int = 10 ** digit
+    return total % power
