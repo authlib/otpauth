@@ -2,22 +2,25 @@ import base64
 import typing as t
 from urllib.parse import quote
 from abc import ABCMeta, abstractmethod
+from .types import SupportedAlgorithms
+
+Self = t.TypeVar("Self", bound="OTP")
 
 
-class OTP(object, metaclass=ABCMeta):
-    TYPE: str
+class OTP(metaclass=ABCMeta):
+    TYPE: t.ClassVar[str]
 
     #: The supportted algorithms
-    ALGORITHMS = ["SHA1", "SHA256", "SHA512"]
+    ALGORITHMS: t.ClassVar[t.List[str]] = ["SHA1", "SHA256", "SHA512"]
 
-    def __init__(self, secret: bytes, digit: int = 6, algorithm: str = "SHA1"):
+    def __init__(self, secret: bytes, digit: int = 6, algorithm: SupportedAlgorithms = "SHA1"):
         assert 0 < digit < 11
         assert algorithm in self.ALGORITHMS
 
         self.secret = secret
         self.digit = digit
         self.algorithm = algorithm
-        self._b32_secret = None
+        self._b32_secret: t.Optional[str] = None
 
     @property
     def b32_secret(self) -> str:
@@ -25,11 +28,11 @@ class OTP(object, metaclass=ABCMeta):
             return self._b32_secret
 
         secret = base64.b32encode(self.secret)
-        self._b32_secret = secret.rstrip(b'=').decode("ascii")
+        self._b32_secret = secret.rstrip(b"=").decode("ascii")
         return self._b32_secret
 
     @classmethod
-    def from_b32encode(cls, secret: t.AnyStr, digit: int = 6, algorithm: str = "SHA1"):
+    def from_b32encode(cls: t.Type[Self], secret: t.Union[bytes, str], digit: int = 6, algorithm: SupportedAlgorithms = "SHA1") -> Self:
         """Create the instance with a base32 encoded secret.
 
         :param secret: A base32 encoded secret string or bytes.
@@ -39,10 +42,10 @@ class OTP(object, metaclass=ABCMeta):
         if isinstance(secret, str):
             secret = secret.encode("utf-8")
 
-        b32_secret = secret.rstrip(b'=')
+        b32_secret = secret.rstrip(b"=")
 
         # add padding back
-        secret += b'=' * (-len(secret) % 8)
+        secret += b"=" * (-len(secret) % 8)
         raw_secret = base64.b32decode(secret)
 
         obj = cls(raw_secret, digit, algorithm)
@@ -66,17 +69,16 @@ class OTP(object, metaclass=ABCMeta):
 
         :param code: The number that this OTP generated.
         """
-        code = str(code)
-        return "0" * (self.digit - len(code)) + code
+        return "{code:0{w}}".format(code=code, w=self.digit)
 
     @abstractmethod
-    def generate(self, *args, **kwargs) -> int:
+    def generate(self, *args: t.Any, **kwargs: t.Any) -> int:
         ...
 
     @abstractmethod
-    def verify(self, code: int, *args, **kwargs) -> bool:
+    def verify(self, code: int, *args: t.Any, **kwargs: t.Any) -> bool:
         ...
 
     @abstractmethod
-    def to_uri(self, label: str, issuer: str, *args, **kwargs) -> str:
+    def to_uri(self, label: str, issuer: str, *args: t.Any, **kwargs: t.Any) -> str:
         ...

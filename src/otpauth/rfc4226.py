@@ -1,7 +1,9 @@
+import typing as t
 import struct
 import hmac
 import hashlib
 from .core import OTP
+from .types import SupportedAlgorithms
 
 
 class HOTP(OTP):
@@ -12,7 +14,7 @@ class HOTP(OTP):
     :param algorithm: Hash algorithm used in HOTP.
     """
 
-    TYPE = "HOTP"
+    TYPE: t.ClassVar[str] = "HOTP"
 
     def generate(self, counter: int) -> int:
         """Generate a HOTP code. The returning result is an integer.
@@ -26,7 +28,7 @@ class HOTP(OTP):
         """
         return generate_hotp(self.secret, counter, self.digit, self.algorithm)
 
-    def verify(self, code: int, counter: int) -> bool:
+    def verify(self, code: int, counter: int) -> bool:  # type: ignore[override]
         """Valid a HOTP code at the given counter.
 
         :param code: A number to be verified.
@@ -36,7 +38,7 @@ class HOTP(OTP):
             return False
         return hmac.compare_digest(bytes(self.generate(counter)), bytes(code))
 
-    def to_uri(self, label: str, issuer: str, counter: int) -> str:
+    def to_uri(self, label: str, issuer: str, counter: int) -> str:  # type: ignore[override]
         """Generate the otpauth protocal string for HOTP.
 
         :param label: Label of the identifier.
@@ -47,7 +49,7 @@ class HOTP(OTP):
         return uri + f"&counter={counter}"
 
 
-def generate_hotp(secret: bytes, counter: int, digit: int=6, algorithm: str = "SHA1") -> int:
+def generate_hotp(secret: bytes, counter: int, digit: int = 6, algorithm: SupportedAlgorithms = "SHA1") -> int:
     """Generate a HOTP code.
 
     :param secret: A secret token for the authentication.
@@ -56,9 +58,9 @@ def generate_hotp(secret: bytes, counter: int, digit: int=6, algorithm: str = "S
     :param algorithm: Hash algorithm used in HOTP.
     """
     hash_alg = getattr(hashlib, algorithm.lower())
-    msg = struct.pack('>Q', counter)
+    msg = struct.pack(">Q", counter)
     digest = hmac.new(secret, msg, hash_alg).digest()
-    offset = digest[19] & 0xf
-    bin_code: int = struct.unpack('>I', digest[offset:offset + 4])[0]
-    base = bin_code & 0x7fffffff
-    return base % (10 ** digit)
+    offset = digest[19] & 0xF
+    bin_code: int = struct.unpack(">I", digest[offset: offset + 4])[0]
+    base = bin_code & 0x7FFFFFFF
+    return base % (10**digit)
