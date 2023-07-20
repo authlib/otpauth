@@ -1,9 +1,8 @@
 import typing as t
 import time
 import hmac
-from .core import OTP
+from .core import OTP, SupportedAlgorithms
 from .rfc4226 import generate_hotp
-from .types import SupportedAlgorithms
 
 
 class TOTP(OTP):
@@ -53,7 +52,12 @@ class TOTP(OTP):
         return uri + f"&period={self.period}"
 
 
-def generate_totp(secret: bytes, period: int = 30, timestamp: t.Optional[int] = None, digit: int = 6, algorithm: SupportedAlgorithms = "SHA1"):
+def generate_totp(
+        secret: bytes,
+        period: int = 30,
+        timestamp: t.Optional[int] = None,
+        digit: int = 6,
+        algorithm: SupportedAlgorithms = "SHA1"):
     """Generate a TOTP code.
 
     A TOTP code is an extension of TOTP algorithm.

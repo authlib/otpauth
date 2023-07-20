@@ -2,8 +2,7 @@ import typing as t
 import struct
 import hmac
 import hashlib
-from .core import OTP
-from .types import SupportedAlgorithms
+from .core import OTP, SupportedAlgorithms
 
 
 class HOTP(OTP):

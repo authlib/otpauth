@@ -2,8 +2,8 @@ import base64
 import typing as t
 from urllib.parse import quote
 from abc import ABCMeta, abstractmethod
-from .types import SupportedAlgorithms
 
+SupportedAlgorithms = t.Literal["SHA1", "SHA256", "SHA512"]
 Self = t.TypeVar("Self", bound="OTP")
 
 
@@ -32,7 +32,11 @@ class OTP(metaclass=ABCMeta):
         return self._b32_secret
 
     @classmethod
-    def from_b32encode(cls: t.Type[Self], secret: t.Union[bytes, str], digit: int = 6, algorithm: SupportedAlgorithms = "SHA1") -> Self:
+    def from_b32encode(
+            cls: t.Type[Self],
+            secret: t.Union[bytes, str],
+            digit: int = 6,
+            algorithm: SupportedAlgorithms = "SHA1") -> Self:
         """Create the instance with a base32 encoded secret.
 
         :param secret: A base32 encoded secret string or bytes.
@@ -56,7 +60,14 @@ class OTP(metaclass=ABCMeta):
         label = quote(label, safe="/@:")
         issuer = quote(issuer, safe="")
         _type = self.TYPE.lower()
-        return f"otpauth://{_type}/{label}?secret={self.b32_secret}&issuer={issuer}&algorithm={self.algorithm}&digits={self.digit}"
+        url = (
+            f"otpauth://{_type}/{label}"
+            f"?secret={self.b32_secret}"
+            f"&issuer={issuer}"
+            f"&algorithm={self.algorithm}"
+            f"&digits={self.digit}"
+        )
+        return url
 
     def string_code(self, code: int) -> str:
         """Add leading 0 if the code length does not match the defined length.

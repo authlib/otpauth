@@ -1,3 +1,4 @@
+from .core import SupportedAlgorithms
 from .rfc4226 import HOTP, generate_hotp
 from .rfc6238 import TOTP, generate_totp
 
@@ -7,6 +8,7 @@ __homepage__ = "https://github.com/lepture/otpauth"
 __version__ = "2.0.0"
 
 __all__ = [
+    "SupportedAlgorithms",
     "HOTP",
     "TOTP",
     "generate_hotp",
