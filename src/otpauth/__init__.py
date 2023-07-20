@@ -5,7 +5,7 @@ from .rfc6238 import TOTP, generate_totp
 
 __author__ = "Hsiaoming Yang <me@lepture.com>"
 __homepage__ = "https://github.com/lepture/otpauth"
-__version__ = "2.0.0"
+__version__ = "2.1.0"
 
 __all__ = [
     "SupportedAlgorithms",
