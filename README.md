@@ -1,8 +1,8 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset=".github/docs/_static/dark-logo.svg">
-  <img alt="OTP Auth logo" src=".github/docs/_static/light-logo.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/_static/dark-logo.svg">
+  <img alt="OTP Auth logo" src="docs/_static/light-logo.svg">
 </picture>
 
 One time password implementations in Python. HOTP and TOTP.
