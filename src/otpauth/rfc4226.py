@@ -35,7 +35,7 @@ class HOTP(OTP):
         """
         if len(str(code)) > self.digit:
             return False
-        return hmac.compare_digest(bytes(self.generate(counter)), bytes(code))
+        return hmac.compare_digest(f'{self.generate(counter):0{self.digit}}', f'{code:0{self.digit}}')
 
     def to_uri(self, label: str, issuer: str, counter: int) -> str:  # type: ignore[override]
         """Generate the otpauth protocal string for HOTP.
