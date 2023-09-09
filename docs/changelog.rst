@@ -9,6 +9,14 @@ Changelog
 
 For **v1**, please head over to https://pythonhosted.org/otpauth/
 
+2.1.1
+-----
+
+**Released on Sep 09, 2023**
+
+- Fix ``.verify`` method
+
+
 2.1.0
 -----
 
