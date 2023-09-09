@@ -80,7 +80,7 @@ class OTP(metaclass=ABCMeta):
 
         :param code: The number that this OTP generated.
         """
-        return "{code:0{w}}".format(code=code, w=self.digit)
+        return f'{code:0{self.digit}}'
 
     @abstractmethod
     def generate(self, *args: t.Any, **kwargs: t.Any) -> int:
