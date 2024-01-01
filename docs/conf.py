@@ -20,12 +20,16 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.intersphinx",
     "sphinx.ext.extlinks",
+    "sphinx_sitemap",
 ]
 
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3", None),
     "sphinx": ("https://www.sphinx-doc.org/en/master", None),
 }
+
+html_baseurl = "https://otp.authlib.org/"
+sitemap_url_scheme = "{link}"
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -45,7 +49,7 @@ html_static_path = ["_static"]
 #
 html_theme = 'shibuya'
 html_theme_options = {
-    "dark_code": True,
+    "accent_color": "blue",
     "light_logo": "_static/light-logo.svg",
     "dark_logo": "_static/dark-logo.svg",
     'twitter_site': 'authlib',
