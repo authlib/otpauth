@@ -1,4 +1,5 @@
 import unittest
+
 from otpauth import HOTP
 
 
@@ -21,11 +22,15 @@ class TestHOTP(unittest.TestCase):
 
     def test_to_uri(self):
         uri = self.hotp.to_uri("Typlog:lepture.com", "Authlib", 0)
-        expected = "otpauth://hotp/Typlog:lepture.com?secret=OB4XI2DPNY&issuer=Authlib&algorithm=SHA1&digits=6&counter=0"
+        expected = (
+            "otpauth://hotp/Typlog:lepture.com?secret=OB4XI2DPNY&issuer=Authlib&algorithm=SHA1&digits=6&counter=0"
+        )
         self.assertEqual(uri, expected)
 
     def test_from_b32encode(self):
-        expected = "otpauth://hotp/Typlog:lepture.com?secret=OB4XI2DPNY&issuer=Authlib&algorithm=SHA1&digits=6&counter=0"
+        expected = (
+            "otpauth://hotp/Typlog:lepture.com?secret=OB4XI2DPNY&issuer=Authlib&algorithm=SHA1&digits=6&counter=0"
+        )
 
         hotp = HOTP.from_b32encode("OB4XI2DPNY")
         value = hotp.generate(0)

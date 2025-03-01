@@ -1,8 +1,10 @@
-import typing as t
-import struct
-import hmac
 import hashlib
-from .core import OTP, SupportedAlgorithms
+import hmac
+import struct
+import typing as t
+
+from .core import OTP
+from .core import SupportedAlgorithms
 
 
 class HOTP(OTP):
@@ -27,7 +29,7 @@ class HOTP(OTP):
         """
         return generate_hotp(self.secret, counter, self.digit, self.algorithm)
 
-    def verify(self, code: int, counter: int) -> bool:  # type: ignore[override]
+    def verify(self, code: int, counter: int) -> bool:
         """Valid a HOTP code at the given counter.
 
         :param code: A number to be verified.
@@ -37,7 +39,7 @@ class HOTP(OTP):
             return False
         return hmac.compare_digest(self.string_code(self.generate(counter)), self.string_code(code))
 
-    def to_uri(self, label: str, issuer: str, counter: int) -> str:  # type: ignore[override]
+    def to_uri(self, label: str, issuer: str, counter: int) -> str:
         """Generate the otpauth protocal string for HOTP.
 
         :param label: Label of the identifier.
@@ -60,7 +62,7 @@ def generate_hotp(secret: bytes, counter: int, digit: int = 6, algorithm: Suppor
     msg = struct.pack(">Q", counter)
     digest = hmac.new(secret, msg, hash_alg).digest()
     offset = digest[19] & 0xF
-    bin_code: int = struct.unpack(">I", digest[offset: offset + 4])[0]
+    bin_code: int = struct.unpack(">I", digest[offset : offset + 4])[0]
     total: int = bin_code & 0x7FFFFFFF
-    power: int = 10 ** digit
+    power: int = 10**digit
     return total % power

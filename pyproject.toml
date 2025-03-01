@@ -30,22 +30,25 @@ classifiers = [
 ]
 
 [project.urls]
+Source = "https://github.com/authlib/otpauth"
 Documentation = "https://otp.authlib.org/"
 Donate = "https://github.com/sponsors/authlib"
 Blog = "https://blog.authlib.org/"
 
 [build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
-[tool.setuptools.dynamic]
-version = {attr = "otpauth.__version__"}
+[dependency-groups]
+dev = [
+    "mypy>=1.4.1",
+    "pytest>=7.4.4",
+    "pytest-cov>=4.1.0",
+    "ruff>=0.9.9",
+]
 
-[tool.setuptools.packages.find]
-where = ["src"]
-
-[tool.setuptools.package-data]
-"otpauth" = ["py.typed"]
+[tool.hatch.version]
+path = "src/otpauth/__init__.py"
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
@@ -72,3 +75,25 @@ python_version = "3.8"
 files = ["src/otpauth"]
 show_error_codes = true
 pretty = true
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = [
+    "B", # flake8-bugbear
+    "E", # pycodestyle
+    "F", # pyflakes
+    "I", # isort
+    "UP", # pyupgrade
+]
+ignore = [
+    "E501", # line-too-long
+    "E722", # bare-except
+]
+
+[tool.ruff.lint.isort]
+force-single-line = true
+
+[tool.ruff.format]
+docstring-code-format = true

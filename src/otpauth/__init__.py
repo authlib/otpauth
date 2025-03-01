@@ -1,7 +1,8 @@
+from ._rfc4226 import HOTP
+from ._rfc4226 import generate_hotp
+from ._rfc6238 import TOTP
+from ._rfc6238 import generate_totp
 from .core import SupportedAlgorithms
-from ._rfc4226 import HOTP, generate_hotp
-from ._rfc6238 import TOTP, generate_totp
-
 
 __author__ = "Hsiaoming Yang <me@lepture.com>"
 __homepage__ = "https://otp.authlib.org/"

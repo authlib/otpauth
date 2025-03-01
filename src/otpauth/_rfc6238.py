@@ -1,8 +1,10 @@
-import typing as t
-import time
 import hmac
-from .core import OTP, SupportedAlgorithms
+import time
+import typing as t
+
 from ._rfc4226 import generate_hotp
+from .core import OTP
+from .core import SupportedAlgorithms
 
 
 class TOTP(OTP):
@@ -32,7 +34,7 @@ class TOTP(OTP):
         """
         return generate_totp(self.secret, self.period, timestamp, self.digit, self.algorithm)
 
-    def verify(self, code: int, timestamp: t.Optional[int] = None) -> bool:  # type: ignore[override]
+    def verify(self, code: int, timestamp: t.Optional[int] = None) -> bool:
         """Valid a TOTP code for the given timestamp.
 
         :param code: A number to be verified.
@@ -42,7 +44,7 @@ class TOTP(OTP):
             return False
         return hmac.compare_digest(self.string_code(self.generate(timestamp)), self.string_code(code))
 
-    def to_uri(self, label: str, issuer: str) -> str:  # type: ignore[override]
+    def to_uri(self, label: str, issuer: str) -> str:
         """Generate the otpauth protocal string for TOTP.
 
         :param label: Label of the identifier.
@@ -53,11 +55,12 @@ class TOTP(OTP):
 
 
 def generate_totp(
-        secret: bytes,
-        period: int = 30,
-        timestamp: t.Optional[int] = None,
-        digit: int = 6,
-        algorithm: SupportedAlgorithms = "SHA1") -> int:
+    secret: bytes,
+    period: int = 30,
+    timestamp: t.Optional[int] = None,
+    digit: int = 6,
+    algorithm: SupportedAlgorithms = "SHA1",
+) -> int:
     """Generate a TOTP code.
 
     A TOTP code is an extension of TOTP algorithm.

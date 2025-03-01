@@ -1,5 +1,5 @@
 import unittest
-import time
+
 from otpauth import TOTP
 
 FIXED_TIME = 1679576495
@@ -24,7 +24,9 @@ class TestTOTP(unittest.TestCase):
 
     def test_to_uri(self):
         uri = self.totp.to_uri("Typlog:lepture.com", "Authlib")
-        expected = "otpauth://totp/Typlog:lepture.com?secret=OB4XI2DPNY&issuer=Authlib&algorithm=SHA1&digits=6&period=30"
+        expected = (
+            "otpauth://totp/Typlog:lepture.com?secret=OB4XI2DPNY&issuer=Authlib&algorithm=SHA1&digits=6&period=30"
+        )
         self.assertEqual(uri, expected)
 
     def test_current_timestamp(self):

@@ -22,10 +22,10 @@ jobs:
           python-version: "3.8"
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: pip install -r requirements-dev.lock
 
-      - name: flake8 lint
-        run: flake8 src/otpauth/
+      - name: ruff lint
+        run: ruff check
 
       - name: mypy lint
         run: mypy

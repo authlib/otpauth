@@ -1,7 +1,8 @@
 import base64
 import typing as t
+from abc import ABCMeta
+from abc import abstractmethod
 from urllib.parse import quote
-from abc import ABCMeta, abstractmethod
 
 SupportedAlgorithms = t.Literal["SHA1", "SHA256", "SHA512"]
 Self = t.TypeVar("Self", bound="OTP")
@@ -33,10 +34,8 @@ class OTP(metaclass=ABCMeta):
 
     @classmethod
     def from_b32encode(
-            cls: t.Type[Self],
-            secret: t.Union[bytes, str],
-            digit: int = 6,
-            algorithm: SupportedAlgorithms = "SHA1") -> Self:
+        cls: t.Type[Self], secret: t.Union[bytes, str], digit: int = 6, algorithm: SupportedAlgorithms = "SHA1"
+    ) -> Self:
         """Create the instance with a base32 encoded secret.
 
         :param secret: A base32 encoded secret string or bytes.
@@ -80,16 +79,13 @@ class OTP(metaclass=ABCMeta):
 
         :param code: The number that this OTP generated.
         """
-        return f'{code:0{self.digit}}'
+        return f"{code:0{self.digit}}"
 
     @abstractmethod
-    def generate(self, *args: t.Any, **kwargs: t.Any) -> int:
-        ...
+    def generate(self, *args: t.Any, **kwargs: t.Any) -> int: ...
 
     @abstractmethod
-    def verify(self, code: int, *args: t.Any, **kwargs: t.Any) -> bool:
-        ...
+    def verify(self, code: int, *args: t.Any, **kwargs: t.Any) -> bool: ...
 
     @abstractmethod
-    def to_uri(self, label: str, issuer: str, *args: t.Any, **kwargs: t.Any) -> str:
-        ...
+    def to_uri(self, label: str, issuer: str, *args: t.Any, **kwargs: t.Any) -> str: ...

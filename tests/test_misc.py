@@ -1,5 +1,7 @@
 import unittest
-from otpauth import HOTP, TOTP
+
+from otpauth import HOTP
+from otpauth import TOTP
 
 
 class TestMisc(unittest.TestCase):
