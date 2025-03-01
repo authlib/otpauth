@@ -2,7 +2,7 @@ import typing as t
 import time
 import hmac
 from .core import OTP, SupportedAlgorithms
-from .rfc4226 import generate_hotp
+from ._rfc4226 import generate_hotp
 
 
 class TOTP(OTP):
