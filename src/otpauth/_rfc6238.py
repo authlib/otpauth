@@ -42,7 +42,11 @@ class TOTP(OTP):
         """
         if len(str(code)) > self.digit:
             return False
-        return hmac.compare_digest(self.string_code(self.generate(timestamp)), self.string_code(code))
+
+        try:
+            return hmac.compare_digest(self.string_code(self.generate(timestamp)), self.string_code(code))
+        except (TypeError, ValueError):
+            return False
 
     def to_uri(self, label: str, issuer: str) -> str:
         """Generate the otpauth protocal string for TOTP.
