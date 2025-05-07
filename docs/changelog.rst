@@ -9,6 +9,13 @@ Changelog
 
 For **v1**, please head over to https://pythonhosted.org/otpauth/
 
+2.1.2
+-----
+
+**Unreleased**
+
+- Avoid ``verify`` to raise an exception when the ``code`` argument is non-ascii.
+
 2.1.1
 -----
 

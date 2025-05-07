@@ -19,6 +19,7 @@ class TestTOTP(unittest.TestCase):
 
         # due to not match
         self.assertFalse(self.totp.verify(12345, FIXED_TIME))
+        self.assertFalse(self.totp.verify("●●●●●●", FIXED_TIME))
 
         self.assertTrue(self.totp.verify(129815, FIXED_TIME))
 

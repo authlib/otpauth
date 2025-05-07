@@ -18,7 +18,10 @@ class TestHOTP(unittest.TestCase):
         # due to not match
         self.assertFalse(self.hotp.verify(12345, 0))
 
+        self.assertFalse(self.hotp.verify("●●●●●●", 0))
+
         self.assertTrue(self.hotp.verify(170566, 0))
+
 
     def test_to_uri(self):
         uri = self.hotp.to_uri("Typlog:lepture.com", "Authlib", 0)
