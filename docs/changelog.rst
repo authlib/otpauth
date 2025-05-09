@@ -9,12 +9,20 @@ Changelog
 
 For **v1**, please head over to https://pythonhosted.org/otpauth/
 
-2.1.2
+2.2.1
 -----
 
-**Unreleased**
+**Released on May 9, 2025**
 
 - Avoid ``verify`` to raise an exception when the ``code`` argument is non-ascii.
+
+2.2.0
+-----
+
+**Released on Mar 1, 2025**
+
+- Add python 3.12, 3.13 supports.
+- Rename RFC files to private filenames.
 
 2.1.1
 -----
