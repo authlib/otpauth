@@ -64,7 +64,7 @@ RFC4226_.
     htop.verify(code, 4)  # True
     htop.verify(code, 6)  # False
 
-.. tip:: TOTP is based on HOTP, most of the time you would use HOTP.
+.. tip:: TOTP is based on HOTP, most of the time you would use TOTP.
 
 Use ``base32`` Secret
 ---------------------
