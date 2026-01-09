@@ -29,7 +29,7 @@ verify the token with :class:`TOTP`::
 
     import otpauth
 
-    totp = otpauth.HOTP(b"user-secret")
+    totp = otpauth.TOTP(b"user-secret")
 
     # generate a code for now
     code: int = totp.generate()
