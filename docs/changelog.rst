@@ -9,6 +9,13 @@ Changelog
 
 For **v1**, please head over to https://pythonhosted.org/otpauth/
 
+2.2.2
+-----
+
+**Released on Aug 22, 2026**
+
+- Fix code generation for SHA-256 and SHA-512.
+
 2.2.1
 -----
 

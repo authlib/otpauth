@@ -6,7 +6,7 @@ from .core import SupportedAlgorithms as SupportedAlgorithms
 
 __author__ = "Hsiaoming Yang <me@lepture.com>"
 __homepage__ = "https://otp.authlib.org/"
-__version__ = "2.2.1"
+__version__ = "2.2.2"
 
 __all__ = [
     "SupportedAlgorithms",
