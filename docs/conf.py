@@ -72,7 +72,11 @@ html_theme_options = {
                 },
             ],
         },
-        {"title": "Sponsor me", "url": "https://github.com/sponsors/authlib"},
+        {
+            "title": "Sponsors",
+            "url": "https://authlib.org/sponsors/",
+            "external": True,
+        },
     ],
 }
 
