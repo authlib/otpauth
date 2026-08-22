@@ -1,8 +1,5 @@
 name: Run tests
 
-permissions:
-  contents: read
-
 on:
   push:
     branches-ignore:
@@ -19,10 +16,10 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6.0.3
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
-      - uses: actions/setup-python@v6.2.0
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.8"
 
@@ -42,14 +39,14 @@ jobs:
       fail-fast: false
       max-parallel: 6
       matrix:
-        python: ["3.8", "3.9", "3.10", "3.11", "3.12", "3.13", "pypy3.9"]
+        python: ["3.10", "3.11", "3.12", "3.13", "3.14", "pypy3.9"]
 
     steps:
-    - uses: actions/checkout@v6.0.3
+    - uses: actions/checkout@v7
       with:
         persist-credentials: false
     - name: Set up Python ${{ matrix.python }}
-      uses: actions/setup-python@v6.2.0
+      uses: actions/setup-python@v6
       with:
         python-version: ${{ matrix.python }}
 
@@ -66,7 +63,7 @@ jobs:
 
     - name: Upload coverage to Codecov
       if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
-      uses: codecov/codecov-action@v7.0.0
+      uses: codecov/codecov-action@v7
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
         files: ./coverage.xml
@@ -75,7 +72,7 @@ jobs:
 
     - name: SonarCloud Scan
       if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
-      uses: SonarSource/sonarqube-scan-action@v8.2.0
+      uses: SonarSource/sonarqube-scan-action@v8
       continue-on-error: true
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

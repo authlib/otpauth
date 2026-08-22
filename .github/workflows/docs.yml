@@ -7,10 +7,6 @@ on:
 
   workflow_dispatch:
 
-
-permissions:
-  contents: read
-
 # Allow one concurrent deployment
 concurrency:
   group: "pages"
@@ -22,11 +18,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v6.0.3
+    - uses: actions/checkout@v7
       with:
         persist-credentials: false
 
-    - uses: actions/setup-python@v6.2.0
+    - uses: actions/setup-python@v6
       with:
         python-version: "3.11"
 
@@ -40,7 +36,7 @@ jobs:
       run: sphinx-build docs _site -b dirhtml
 
     - name: Upload artifact
-      uses: actions/upload-pages-artifact@v5.0.0
+      uses: actions/upload-pages-artifact@v5
 
   deploy:
     environment:
@@ -56,4 +52,4 @@ jobs:
     steps:
     - name: Deploy to GitHub Pages
       id: deployment
-      uses: actions/deploy-pages@v5.0.0
+      uses: actions/deploy-pages@v5
